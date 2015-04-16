@@ -1,7 +1,14 @@
-## Put comments here that give an overall description of what your
-## functions do
+#' makeCacheMatrix caches a given matrix and its inverse. Use the return of this
+#' functon to chache a result of a matrix inverse calculation by cacheSolve 
+#' instead of recalculating.
+#' 
+#' @param x : matrix that needs to be cached
+#' @return a list of 4 getter-setter-like functions with corresponding names:
+#' get, set, setMtxInv and getMtxInv. get/set pair get/sets matrix for which
+#' the inverse needs to be calculated. set caches the matrix under "x"
+#' getMtxInv/setMtxInv get/sets a precalculated
+#' inverse. setMtxInv caches the inverse under "mtx.inv"
 
-## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
   mtx.inv<-NULL
@@ -32,11 +39,17 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+#' cacheSolve solves the matrix and caches the result (inverse) for further reuse.
+#' 
+#' @param a list of 4 getter/setter functions from makeCacheMatrix
+#' @param ... variadic argumets list used by the "solve" function 
+#' within the body of cacheSolve
+#' @return an inverse of a given matrix. In case the inverse has been calculated
+#' before - returns the chashed value.
+#'
 
 cacheSolve <- function(x, ...) {
   
-  ## Return a matrix that is the inverse of 'x'
   mtx.inv <- x$getMtxInv()
   if(!is.null(mtx.inv)) {
     message("Getting cached inverse..")
