@@ -10,7 +10,7 @@ makeCacheMatrix <- function(x = matrix()) {
   ##Setter for the matrix
   set<-function(y){
     x<<-y
-    mtx.inv<-NULL
+    mtx.inv<<-NULL
   }
   ##Getter for the matrix
   get<-function(){
